@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: raleway_f;
+    src: url(../fonts/raleway-regular.woff2);
+}
+
+@font-face {
+    font-family: raleway_f;
+    src: url(../fonts/raleway-black.woff2);
+    font-weight: 900;
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+    --transition: transform .75s cubic-bezier(.075, .5, 0, 1);
+}
+
+body {
+    font-family: raleway_f, sans-serif;
+    line-height: 1.55;
+}
+
+.layers {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+    transition: var(--transition);
+}
+
+.layered_section {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.layered_section::after {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    height: calc(var(--index) * 10);
+    background-image: url(../img/ground.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    bottom: calc(var(--index) * -4.5);
+}
+
+.layer_back {
+    background-image: url(../img/layer-base.png);
+    min-height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    transform: translate3d(0, calc(var(--scrollTop) / 1.5), 0);
+}
+
+.layer_main {
+    background-image: url(../img/layer-middle.png);
+    min-height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+    text-transform: uppercase;
+    font-weight: 900;
+    font-family: raleway_f;
+    color: #e7e7e0;
+    text-shadow: 0 0 15px #9e7d35;
+}
+
+.layer_top {
+    background-image: url(../img/layer-front.png);
+    min-height: 100vh;
+    width: 100vw;
+    z-index: 3;
+    transform: translate3d(0, calc(var(--scrollTop) / 6), 0);
+}
+
+h1 {
+    font-size: calc(var(--index)*2.5);
+    letter-spacing: calc(var(--index)/2.25);
+    margin-top: calc(var(--index)*(-0.8));
+}
+
+h1+p {
+    font-size: calc(var(--index)*0.9);
+    letter-spacing: calc(var(--index)/3.5);
+}
+
+
+.another_section {
+    position: relative;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-image: url(../img/dungeon.jpg);
+    background-size: cover;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #e7e7e0;
+    text-shadow: 0 0 15px #9e7d35;
+    padding: 30vh 0;
+    text-align: center;
+    --another_section: translate3d(0, calc((var(--scrollTop) / -6) + 100px), 0);
+}
+
+.another_section::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    width: 100vw;
+    height: calc(var(--index) * 10);
+    background-image: url(../img/ground.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: calc(var(--index) * -5);
+}
+
+h2 {
+	text-transform: uppercase;
+	font-size: calc(var(--index) * 1.8);
+	letter-spacing: calc(var(--index) / 7.5);
+	transform: var(--another_section);
+	transition: var(--transition);
+	will-change: transform;
+}
+
+h2+p {
+	max-width: calc(var(--index) * 30);
+	font-size: calc(var(--index) * .9);
+	margin-top: calc(var(--index) / 1.25);
+	transform: var(--another_section);
+	transition: var(--transition);
+	will-change: transform;
+}
+
+.copy {
+    position: absolute;
+	bottom: calc(var(--index) * 2.5);
+	opacity: .45;
+	font-size: calc(var(--index) * .75);
+	letter-spacing: calc(var(--index) / 37.5);
+}
